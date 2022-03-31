@@ -1,0 +1,6 @@
+---
+title: "P8106 HW4"
+author: "Brian Jo Hsuan Lee"
+date: "3/31/2022"
+output: pdf_document
+---
