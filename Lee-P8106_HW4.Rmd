@@ -4,3 +4,32 @@ author: "Brian Jo Hsuan Lee"
 date: "3/31/2022"
 output: pdf_document
 ---
+
+Load packages
+```{r}
+library(tidyverse)
+library(caret)
+```
+
+```{r}
+set.seed(2022)
+
+# import and tidy
+data = read_csv("./College.csv") %>% 
+  janitor::clean_names() %>% 
+  select(-college)
+
+# partition data into training and testing sets into randomized 4:1 splits
+train_index = createDataPartition(y = data$outstate, p = 0.8, list = FALSE)
+train_data = data[train_index, ]
+test_data = data[-train_index, ]
+
+# matrices of predictors 
+train_pred = model.matrix(outstate ~ ., train_data)[ ,-1]
+test_pred = model.matrix(outstate ~ ., test_data)[ ,-1]
+
+# vectors of response
+train_resp = train_data$outstate
+test_resp = test_data$outstate
+```
+
